@@ -34,6 +34,9 @@ const RS_DEFAULT_HEADERS = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "*",
 };
+const PROXYS = {
+  "win": "https://api.allorigins.win/raw?url="
+};
 
 const CACHE_DIR = "./cache/";
 const CACHE_TIME = 3600; // 1 hour
@@ -79,6 +82,7 @@ async function controlRequest({ request, respondWith }: Deno.RequestEvent) {
   ) ?? [] as string[];
   // const useCache = !!$url.searchParams.get("cache");
   const timeout = parseInt($url.searchParams.get("timeout") ?? "0");
+  const proxy = PROXYS[$url.searchParams.get("proxy")] ?? null;
 
   // Always exclude the Host header
   rqExcludeHeaders.push("Host");
@@ -96,10 +100,8 @@ async function controlRequest({ request, respondWith }: Deno.RequestEvent) {
     headers.set(key, value);
   }
 
-  console.log(headers)
-
   try {
-    const response = await fetch(url, {
+    const response = await fetch(proxy + url, {
       headers,
       method,
       body,
