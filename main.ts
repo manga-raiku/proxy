@@ -83,7 +83,7 @@ async function controlRequest({ request, respondWith }: Deno.RequestEvent) {
   // const useCache = !!$url.searchParams.get("cache");
   const timeout = parseInt($url.searchParams.get("timeout") ?? "0");
   const _proxy = PROXYS[$url.searchParams.get("proxy")] ?? null;
-  const proxy = typeof _proxy === "string" ? _proxy : undefined;
+  const proxy: string = typeof _proxy === "string" ? _proxy : "";
   
   // Always exclude the Host header
   rqExcludeHeaders.push("Host");
