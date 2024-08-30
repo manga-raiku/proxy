@@ -101,6 +101,8 @@ async function controlRequest({ request, respondWith }: Deno.RequestEvent) {
     headers.set(key, value);
   }
 
+  console.log("Request to: %s from %s", url, request.headers.get("origin") || request.headers.get("referer"))
+
   try {
     const response = await fetch(proxy + url, {
       headers,
