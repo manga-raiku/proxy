@@ -104,7 +104,7 @@ async function controlRequest({ request, respondWith }: Deno.RequestEvent) {
 
   const host = request.headers.get("origin") || request.headers.get("referer")
   console.log("Request to: %s from %s", url, host)
-  if (DOMAIN_BANNED.some(domain => host.endsWith(domain))) {
+  if (host && DOMAIN_BANNED.some(domain => host.endsWith(domain))) {
     console.warn(`Domain name ${domain} banned`)
     return respondWith(
       new Response(`Your domain name ${domain} has been banned due to suspected service abuse. Please contact shin@shin.is-a.dev and explain your reasons for using this proxy.`, { status: 403 })
