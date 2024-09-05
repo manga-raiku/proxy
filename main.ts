@@ -37,6 +37,7 @@ const RS_DEFAULT_HEADERS = {
 const PROXYS = {
   "win": "https://api.allorigins.win/raw?url="
 };
+const DOMAIN_BANNED = ["nipogota.com.br", "chat.typefunnel.space"]
 
 const CACHE_DIR = "./cache/";
 const CACHE_TIME = 3600; // 1 hour
@@ -51,8 +52,6 @@ console.log(`HTTP webserver running. Access it at: http://localhost:8000/`);
 for await (const conn of server) {
   serveHttp(conn);
 }
-
-const DOMAIN_BANNED = ["nipogota.com.br", "chat.typefunnel.space"]
 
 async function controlRequest({ request, respondWith }: Deno.RequestEvent) {
   const $url = new URL(request.url);
