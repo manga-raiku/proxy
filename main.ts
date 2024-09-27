@@ -37,7 +37,7 @@ const RS_DEFAULT_HEADERS = {
 const PROXYS = {
   "win": "https://api.allorigins.win/raw?url="
 };
-const DOMAIN_BANNED = ["nipogota.com.br", "chat.typefunnel.space"]
+const DOMAIN_BANNED = ["nipogota.com.br", "chat.typefunnel.space", "localhost:3000"]
 
 const CACHE_DIR = "./cache/";
 const CACHE_TIME = 3600; // 1 hour
